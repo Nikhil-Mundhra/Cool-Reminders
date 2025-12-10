@@ -1,0 +1,74 @@
+<!--views/login.hbs-->
+
+<!-- outer page container -->
+<div style="max-width:1100px; margin:0 auto; padding:2rem 2rem;">
+
+  <!-- two column layout -->
+  <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:3rem;">
+
+    <!-- hero copy -->
+    <div>
+      <h1 style="color:#1857b6; font-size:3rem; margin:0 0 0.75rem 0;">Cool Reminders</h1>
+      <p style="font-size:1.05rem; margin:0;">Take to do lists to the next level.</p>
+    </div>
+
+    <!-- auth card -->
+    <div style="background:#fff; padding:1.25rem 1.5rem; width:360px; border:1px solid #ccc; border-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,.05);">
+
+      {{> error}}
+
+      <!-- single form with Parsley -->
+      <form action="/login" method="post" data-validate="true" data-parsley-errors-messages-disabled>
+
+        <label style="display:block; margin-bottom:.35rem;">Email or Username</label>
+        <input
+          name="emailOrUsername"
+          type="text"
+          required
+          data-parsley-notblank
+          data-parsley-minlength="3"
+          autocomplete="username"
+          style="width:100%; 
+                margin-bottom:.7rem; 
+                font-size:1rem; 
+                padding:.69rem .65rem; 
+                border:1px solid #ccc; 
+                border-radius:4px;" />
+
+        <label style="display:block; margin-bottom:.35rem;">Password</label>
+        <input
+          name="password"
+          type="password"
+          required
+          data-parsley-notblank
+          data-parsley-minlength="8"
+          autocomplete="current-password"
+          style="width:100%; 
+                margin-bottom:.9rem; 
+                font-size:1rem; 
+                padding:.6rem .65rem; 
+                border:1px solid #ccc; 
+                border-radius:4px;" />
+
+        <button style="width:100%; 
+        background:#1857b6; 
+        color:#fff; 
+        border:none; 
+        padding:.9rem; 
+        border-radius:5px; 
+        font-size:1rem; 
+        cursor:pointer;">Log In</button>
+      </form>
+
+      <p style="margin-top:.7rem; font-size:1rem;">
+        New here? <a href="/signup">Create an account</a>
+      </p>
+      <form action="/guest" method="post" style="margin-top: .75rem;">
+        <!-- Guest sessions do not need any inputs -->
+        <button class="btn primary" style="width:100%;">
+          Continue as guest
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

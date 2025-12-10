@@ -1,0 +1,214 @@
+<div id="dashboard-app" class="shell" data-vue-root="dashboard">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem;">
+    <h1 style="margin:0; font-size:1.8rem; color:#1857b6;">Dashboard</h1>
+  </div>
+
+  <div class="shell-grid">
+
+    <!-- Sidebar: Lists + Tags -->
+    <aside class="sidebar">
+      <h2>Lists</h2>
+        <ul class="list-buttons">
+          {{#each lists}}
+            <li>
+              <form method="get" action="/dashboard" style="margin:0;">
+                <input type="hidden" name="list" value="{{this.id}}">
+                {{#if ../currentTagId}}
+                  <input type="hidden" name="tag" value="{{../currentTagId}}">
+                {{/if}}
+                <button
+                  class="list-button {{#if (eq ../currentListId this.id)}}active{{/if}}"
+                  type="submit"
+                  style="background: {{this.color}}; border-color: {{this.color}};">
+                  <span
+                    class="list-icon"
+                    data-list-id="{{this.id}}"
+                    data-list-title="{{this.title}}"
+                    data-list-color="{{this.color}}"
+                  ></span>
+                  <span class="list-title">{{this.title}}</span>
+                </button>
+              </form>
+            </li>
+          {{/each}}
+        </ul>
+
+      <!-- Add new list -->
+      <form method="post" action="/lists" style="margin-top:1rem; display:grid; gap:.35rem;">
+        <input type="text"
+               name="title"
+               placeholder="New list name"
+                required
+               style="padding:.35rem .5rem; border-radius:6px; border:1px solid #ccc; font-size:.9rem;">
+        <input type="color"
+                name="color"
+               value="#dfe6e9"
+               style="width:100%; padding:0; border:none; background:transparent; height:2rem;">
+        <button class="btn primary" style="width:100%; font-size:.85rem;">Add list</button>
+      </form>
+
+      <!-- Tags filter + color -->
+      <div style="margin-top:1.5rem;">
+        <h2>Tags</h2>
+        <ul class="list-buttons">
+          <li>
+            <form method="get" action="/dashboard" style="margin:0;">
+              {{#if currentListId}}
+                <input type="hidden" name="list" value="{{currentListId}}">
+              {{/if}}
+              <button class="list-button {{#unless currentTagId}}active{{/unless}}" type="submit">
+                <span class="list-title">All</span>
+              </button>
+            </form>
+          </li>
+          {{#each tags}}
+            <li style="display:flex; align-items:center; gap:6px;">
+              <form method="get" action="/dashboard" style="margin:0; flex:1;">
+                {{#if ../currentListId}}
+                  <input type="hidden" name="list" value="{{../currentListId}}">
+                {{/if}}
+                <input type="hidden" name="tag" value="{{this.id}}">
+                <button
+                  class="list-button {{#if (eq ../currentTagId this.id)}}active{{/if}}"
+                  type="submit"
+                  data-tag-filter-id="{{this.id}}"
+                  style="border-left:6px solid {{this.color}};">
+                  <span class="list-title">{{this.name}}</span>
+                </button>
+              </form>
+              <input type="color"
+                     class="tag-color-picker"
+                     data-tag-id="{{this.id}}"
+                     value="{{this.color}}"
+                     style="width:2rem; padding:0; border:none; background:transparent; height:2rem;">
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Split view: left = tasks, right = editor -->
+    <main class="split">
+
+      <!-- Left content: form + task cards -->
+      <section>
+
+        <!-- Quick add form (collapsible version) -->
+        <section class="quickadd">
+          <form method="post" action="/tasks" 
+              data-validate="true" 
+              data-parsley-errors-messages-disabled
+              novalidate 
+              style="display:grid; 
+              gap:.75rem;">
+            <input type="hidden" name="listId" value="{{currentListId}}">
+
+            <!-- Title always visible -->
+            <input
+              name="title"
+              class="input"
+              placeholder="Title"
+              required
+              data-parsley-notblank
+              data-parsley-maxlength="140">
+
+            <!-- More options toggle -->
+            <button
+              type="button"
+              class="quickadd-details-toggle"
+              aria-controls="quickadd-details"
+              :aria-expanded="quickaddExpanded ? 'true' : 'false'"
+              @click="toggleQuickaddDetails">
+              More options
+              <span
+                class="quickadd-details-chevron"
+                aria-hidden="true">
+                ▾
+              </span>
+            </button>
+
+            
+            <!-- Collapsible block: notes, link, tags, due, priority -->
+            <div id="quickadd-details"
+                class="quickadd-details"
+                v-show="quickaddExpanded">
+
+              <input
+                name="notes"
+                class="input"
+                placeholder="Notes (optional)"
+                data-parsley-maxlength="500">
+
+              <input
+                name="linkUrl"
+                class="input"
+                placeholder="Link URL (optional)">
+
+              <input
+                  name="tags"
+                  class="input"
+                  placeholder="Tags (comma separated)">
+
+              <div class="quickadd-due-row">
+                  <input
+                    type="date"
+                    name="dueDate"
+                    class="input quickadd-due-input"
+                    placeholder="Due date"
+                    data-parsley-notpast>
+
+                  <input
+                    type="time"
+                    name="dueTime"
+                    class="input quickadd-due-input"
+                    placeholder="Time">
+              </div>
+
+              <select name="priority" class="input">
+                  <option value="normal" selected>normal</option>
+                  <option value="high">high</option>
+                  <option value="low">low</option>
+              </select>
+            </div>
+
+            <button style="padding:.65rem; border:none; background:#1857b6; color:#fff; border-radius:6px; cursor:pointer;">
+              Add Task
+            </button>
+          </form>
+        </section>
+
+        <!-- Sticky notes grid -->
+        <section>
+          {{#if tasks.length}}
+            <ul class="cards">
+              {{#each tasks}}
+                {{> task_card task=this}}
+              {{/each}}
+            </ul>
+          {{else}}
+            <div class="sidebar">
+              <p style="margin:0 0 .5rem 0; color:#555;">No tasks yet in this list</p>
+              <p style="margin:0; font-size:.95rem; color:#666;">Use the add box above to create your first task</p>
+            </div>
+          {{/if}}
+        </section>
+      </section>
+
+      <!-- Right panel for editable task details -->
+      <aside id="drawer" class="split-drawer" data-lists='{{{json lists}}}'>
+        <div class="drawer-header">
+          <strong id="d-title">Task Details</strong>
+          <button id="d-close" class="btn">Close</button>
+        </div>
+        <div id="d-body" class="drawer-body"></div>
+      </aside>
+
+    </main>
+  </div>
+</div> {{!-- end #dashboard-root --}}
+
+<!-- Vue will read this to hydrate initial state -->
+<script id="dashboard-state" type="application/json">
+  {{{json dashboardState}}}
+</script>

@@ -1,0 +1,31 @@
+{{!-- views/partials/settings.hbs --}}
+<div class="settings-shell">
+  <nav class="settings-nav" aria-label="Settings">
+    <a
+      href="/settings/profile"
+      class="{{#if (eq settingsTab "profile")}}active{{/if}}"
+    >
+      Profile
+    </a>
+
+    <a
+      href="/settings/layout"
+      class="{{#if (eq settingsTab "layout")}}active{{/if}}"
+    >
+      <span>Layout</span>
+      <span>&</span>
+      <span>Preferences</span>
+    </a>
+
+    <a
+      href="/settings/notifications"
+      class="{{#if (eq settingsTab "notifications")}}active{{/if}}"
+    >
+      Notifications
+    </a>
+  </nav>
+
+  <section class="settings-main">
+    {{> @partial-block}}
+  </section>
+</div>

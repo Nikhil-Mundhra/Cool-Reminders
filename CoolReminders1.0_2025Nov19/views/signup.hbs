@@ -1,0 +1,99 @@
+{{!-- views/signup.hbs --}}
+{{!-- ===========================================================
+     SIGNUP PAGE
+     -----------------------------------------------------------
+     Uses the global layout.hbs (header + footer + scripts) and
+     the shared base.css tokens. This page renders a simple hero
+     + an auth card with a validated signup form.
+
+     Key conventions:
+     - Use .container to center content to max width
+     - Use .login-grid to create hero + card layout
+     - Use .card and .btn classes for consistent visuals
+     - Parsley attributes for client-side validation
+     - Keep form fields accessible: id/for, autocomplete
+     =========================================================== --}}
+
+<div class="container page">
+  <div class="login-grid">
+    
+    {{!-- Left column: hero copy (brand-aligned) --}}
+    <section>
+      <h1 class="app-title">Create Account</h1>
+      <p class="app-tagline">
+        One account for lists, reminders, and daily summaries.
+        Keep everything tidy and on time.
+      </p>
+    </section>
+
+    {{!-- Right column: signup card --}}
+    <section class="card auth-card">
+      {{!-- Error partial (renders any server-provided error message) --}}
+      {{> error}}
+
+      {{!-- Signup form
+           data-validate="true" triggers Parsley init from layout.hbs
+           We disable spellcheck on username/email to avoid noisy red underlines --}}
+      <form action="/signup" method="post"
+            data-validate="true" data-parsley-errors-messages-disabled
+            novalidate>
+
+        {{!-- Username field
+             - Required, 3–30 chars, alnum+underscore only
+             - autocomplete=username for better browser autofill --}}
+        <div class="stack-md">
+          <label for="su-username">Username</label>
+          <input id="su-username"
+                 class="input"
+                 name="username" type="text"
+                 required data-parsley-notblank
+                 data-parsley-pattern="^[A-Za-z0-9_]{3,30}$"
+                 data-parsley-pattern-message="Use letters numbers underscore only"
+                 data-parsley-minlength="3"
+                 autocomplete="username"
+                 spellcheck="false">
+        </div>
+
+        {{!-- Email field
+             - Required and type=email so Parsley & browser both validate
+             - autocomplete=email to help autofill --}}
+        <div class="stack-md" style="margin-top: 12px;">
+          <label for="su-email">Email</label>
+          <input id="su-email"
+                 class="input"
+                 name="email" type="email"
+                 required data-parsley-type="email"
+                 autocomplete="email"
+                 spellcheck="false">
+        </div>
+
+        {{!-- Password field
+             - Required, min length 8 (aligns with server-side policy)
+             - autocomplete=new-password for password managers --}}
+        <div class="stack-md" style="margin-top: 12px;">
+          <label for="su-password">Password</label>
+          <input id="su-password"
+                 class="input"
+                 name="password" type="password"
+                 required data-parsley-notblank
+                 data-parsley-minlength="8"
+                 autocomplete="new-password">
+        </div>
+
+        {{!-- Submit button
+             - Uses .btn .btn-primary for centralized styling --}}
+        <div style="margin-top: 16px;">
+          <button class="btn btn-primary" type="submit">Sign Up</button>
+        </div>
+
+      </form>
+
+      {{!-- Small helper link --}}
+      <p class="muted" style="margin-top: 12px;">
+        Already have an account?
+        <a href="/login">Log in</a>
+      </p>
+    </section>
+
+  </div>
+</div>

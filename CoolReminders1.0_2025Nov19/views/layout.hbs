@@ -1,0 +1,100 @@
+{{!-- views/layout.hbs --}}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{title}}</title>
+
+    <!-- Central CSS -->
+    <link rel="stylesheet" href="/public/css/base.css">
+    <link rel="stylesheet" href="/public/css/dashboard.css">
+
+    <!-- Parsley (global) -->
+    <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2/dist/parsley.min.js"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var forms = document.querySelectorAll('form[data-validate="true"]');
+          if (window.Parsley && forms.length) {
+            // Existing "notblank"
+            window.Parsley.addValidator('notblank', {
+              validateString: function (value) { return value.trim().length > 0; },
+              messages: { en: 'Required' }
+            });
+
+            // NEW: simple "date not in the past" validator (YYYY-MM-DD only)
+            window.Parsley.addValidator('notpast', {
+              validateString: function (value) {
+                if (!value) return true; // optional
+                // Assume value like "2025-11-18"
+                var today = new Date();
+                var todayYMD = today.toISOString().slice(0, 10);
+                return value >= todayYMD;
+              },
+              messages: { en: 'Due date cannot be in the past' }
+            });
+
+            Array.prototype.forEach.call(forms, function (f) { f.parsley(); });
+          }
+        });
+      </script>
+
+      <!-- Vue 3 (global build, used on Dashboard) -->
+      <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  </head>
+
+  <body class="app-body theme-{{theme}}">
+    <!-- Site Header -->
+    <header class="site-header">
+      <!-- IMPORTANT: this wrapper must NOT be self-closed -->
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="brand-icon"></div>
+          <span>Cool Reminders</span>
+        </div>
+
+        <nav class="app-nav">
+          {{#if userDisplay}}
+            {{!-- Logged in: hide Home, show app areas --}}
+            <a href="/dashboard"  class="{{#if (eq active "dashboard")}}active{{/if}}">Dashboard</a>
+            <a href="/settings"   class="{{#if (eq active "settings")}}active{{/if}}">Settings</a>
+            <a href="/about"      class="{{#if (eq active "about")}}active{{/if}}">About</a>
+          {{else}}
+            {{!-- Logged out: show Home and About, hide app areas --}}
+            <a href="/"           class="{{#if (eq active "home")}}active{{/if}}">Home</a>
+            <a href="/about"      class="{{#if (eq active "about")}}active{{/if}}">About</a>
+          {{/if}}
+        </nav>
+
+
+        <div class="top-actions">
+          {{#if userDisplay}}
+            <span class="user-name">Hi, {{userDisplay}}</span>
+            <form method="post" action="/logout" style="margin:0;">
+              <button type="submit" class="btn btn-primary">Log out</button>
+            </form>
+          {{/if}}
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content area -->
+    <main class="app-main">
+      <div class="page">
+        {{{body}}}
+      </div>
+    </main>
+
+    <!-- Global footer -->
+    <footer class="app-footer">
+      <p>&copy; 2025 Cool Reminders • <a href="/about">About</a></p>
+    </footer>
+
+    <!-- Global page JS (safe to include always) -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Vue 3 (global build) for dashboard -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="/public/js/dashboard.js"></script>
+  </body>
+</html>

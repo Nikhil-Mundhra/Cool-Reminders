@@ -1,0 +1,21 @@
+{
+  "name": "final-project-nikhil-mundhra",
+  "version": "1.0.0",
+  "description": "The content below is a project proposal / requirements document. Replace the text below the lines marked \"__TODO__\" with details specific to your project. Remove the \"TODO\" lines.",
+  "main": "app.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/issues"
+  },
+  "homepage": "https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra#readme"
+}

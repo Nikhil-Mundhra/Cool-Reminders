@@ -1,0 +1,73 @@
+{{!-- views/settings-notifications.hbs --}}
+{{#> settings}}
+
+  <h1 class="settings-title">Notifications</h1>
+  <p class="settings-subtitle">
+    Receive alerts when important events occur. Alerts will be batched so you are not overwhelmed.
+  </p>
+
+  <form method="post" action="/settings/notifications" novalidate>
+    <div class="settings-section">
+      <label class="toggle">
+        <input
+          class="toggle-input"
+          type="checkbox"
+          name="morning"
+          value="1"
+          {{#if morning}}checked{{/if}}
+        >
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+        <span class="toggle-label">Morning summaries via email</span>
+      </label>
+
+      <label class="toggle">
+        <input
+          class="toggle-input"
+          type="checkbox"
+          name="high"
+          value="1"
+          {{#if high}}checked{{/if}}
+        >
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+        <span class="toggle-label">High priority notifications</span>
+      </label>
+
+      <label class="toggle">
+        <input
+          class="toggle-input"
+          type="checkbox"
+          name="normal"
+          value="1"
+          {{#if normal}}checked{{/if}}
+        >
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+        <span class="toggle-label">Normal priority notifications</span>
+      </label>
+
+      <label class="toggle">
+        <input
+          class="toggle-input"
+          type="checkbox"
+          name="low"
+          value="1"
+          {{#if low}}checked{{/if}}
+        >
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+        <span class="toggle-label">Low priority notifications</span>
+      </label>
+    </div>
+
+    <div style="margin-top: var(--space-lg);">
+      <button class="btn primary" type="submit">Save notification settings</button>
+    </div>
+  </form>
+
+{{/settings}}

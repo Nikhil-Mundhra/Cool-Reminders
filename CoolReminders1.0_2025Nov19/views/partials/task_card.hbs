@@ -1,0 +1,121 @@
+{{!-- views/partials/task_card.hbs --}}
+
+<!-- ============================================================
+     TASK CARD (collapsed)
+     ------------------------------------------------------------
+     Sticky-note task preview. Behavior rules:
+       • Clicking the card background opens the right drawer.
+       • Clicking the title turns it into an input; on blur/Enter it auto-saves.
+       • Clicking the due date turns it into a date input; on change/blur it auto-saves.
+       • "Done" / "Delete" are real forms (POST) and do not open drawer.
+       • Subtasks preview shows the first two children; toggling a box auto-saves.
+     ============================================================ -->
+<li class="note"
+    data-task-id="{{task.id}}"
+    aria-label="Task card: {{task.title}}"
+    style="background: {{task.bgColor}};">
+  <!-- ------------------------------------------------------------
+       1) TITLE (inline editable trigger)
+     ------------------------------------------------------------ -->
+  <button type="button"
+          class="title js-edit-title"
+          data-field="title"
+          aria-label="Edit title"
+          style="all:unset; display:block; font-weight:700; color:var(--brand); cursor:text;">
+    {{task.title}}
+  </button>
+
+  <!-- ------------------------------------------------------------
+       2) NOTES PREVIEW (optional, truncated)
+     ------------------------------------------------------------ -->
+  {{#if task.notes}}
+    <div class="notes-preview">{{truncate task.notes 80}}</div>
+  {{/if}}
+
+  <!-- ------------------------------------------------------------
+       3) DUE DATE (inline editable trigger)
+     ------------------------------------------------------------ -->
+  <div class="meta">
+    <span>Due:</span>
+    <button type="button"
+            class="js-edit-due"
+            data-field="dueAt"
+            data-current="{{task.dueISO}}"
+            aria-label="Edit due date"
+            style="all:unset; cursor:text;">
+      <time datetime="{{task.dueISO}}">{{task.dueText}}</time>
+    </button>
+  </div>
+
+  <!-- ------------------------------------------------------------
+       4) PRIORITY CHIP
+     ------------------------------------------------------------ -->
+  <div class="chips" aria-label="Priority indicator">
+    <span class="chip {{task.priority}}">{{task.priority}}</span>
+  </div>
+
+  <!-- ------------------------------------------------------------
+       4b) TAGS (optional)
+     ------------------------------------------------------------ -->
+  {{#if task.tags.length}}
+    <div class="tag-row" aria-label="Tags">
+      {{#each task.tags}}
+        <span class="tag-pill"
+              data-tag-id="{{this.id}}"
+              style="background: {{this.color}};">
+          {{this.name}}
+        </span>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <!-- ------------------------------------------------------------
+       5) FIRST LINK (optional)
+     ------------------------------------------------------------ -->
+  {{#if task.link}}
+    <div class="link">
+      <a href="{{task.link.url}}" target="_blank" rel="noopener"
+         onclick="event.stopPropagation()">
+        {{task.link.title}}
+      </a>
+    </div>
+  {{/if}}
+
+  <!-- ------------------------------------------------------------
+       6) SUBTASKS PREVIEW (first two)
+     ------------------------------------------------------------ -->
+  {{#if task.subtasks.length}}
+    <div class="subtasks" aria-label="Subtasks">
+      {{#each task.subtasks}}
+        <label style="display:flex; align-items:center; gap:.5rem; margin:.25rem 0;"
+               onclick="event.stopPropagation()">
+          <input type="checkbox"
+                 class="js-toggle-subtask"
+                 data-parent="{{../task.id}}"
+                 data-subtask="{{this.id}}"
+                 {{#if this.completed}}checked{{/if}}>
+          <span style="font-size:.92rem; color:#333;">{{this.title}}</span>
+        </label>
+      {{/each}}
+
+      {{#if task.moreSubtasks}}
+        <div class="muted" style="font-size:.85rem;">+{{task.moreSubtasks}} more</div>
+      {{/if}}
+    </div>
+  {{/if}}
+
+  <!-- ------------------------------------------------------------
+       7) ACTION BUTTONS (forms)
+     ------------------------------------------------------------ -->
+  <div class="controls">
+    {{#if task.completed}}
+      <form method="post" action="/tasks/{{task.id}}/delete" onclick="event.stopPropagation()">
+        <button class="btn-note">Delete</button>
+      </form>
+    {{else}}
+      <form method="post" action="/tasks/{{task.id}}/complete" onclick="event.stopPropagation()">
+        <button class="btn-note primary">Done</button>
+      </form>
+    {{/if}}
+  </div>
+</li>

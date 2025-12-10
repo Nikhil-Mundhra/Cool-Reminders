@@ -1,0 +1,26 @@
+/* public/css/dashboard.css */
+
+/* chips and note polish */
+.notes-preview{background:#fffaf0;border:1px solid #e4d79c;border-radius:6px;padding:.45rem .55rem;margin:.35rem 0;color:#463f2a}
+.chips{margin:.25rem 0}
+.chip{display:inline-block;padding:.15rem .5rem;border-radius:999px;font-size:.8rem;border:1px solid rgba(0,0,0,.1);background:#fff8cf}
+.chip.low{background:#e0f7e9}
+.chip.normal{background:#eef2ff}
+.chip.high{background:#ffe5e5}
+
+/* side drawer */
+.drawer{position:fixed;top:0;right:-480px;width:480px;max-width:90vw;height:100vh;background:#fff;border-left:1px solid #ddd;box-shadow:-4px 0 16px rgba(0,0,0,.15);transition:right .2s ease;z-index:1001;display:flex;flex-direction:column}
+.drawer.open{right:0}
+.drawer-header{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1rem;border-bottom:1px solid #eee}
+.drawer-body{padding:1rem;overflow:auto}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .2s;z-index:1000}
+.overlay.show{opacity:1;pointer-events:auto}
+
+/* smooth open animation */
+.split-drawer {
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+  }
+.split-drawer.show {
+    opacity: 1;
+  }

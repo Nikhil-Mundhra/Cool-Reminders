@@ -1,0 +1,192 @@
+{{!-- views/settings-profile.hbs --}}
+{{#> settings}}
+
+  <h1 class="settings-title">Profile</h1>
+  <p class="settings-subtitle">
+    Update your name and email. To save any changes, confirm with your current password.
+  </p>
+
+  {{> error}}
+
+  <form
+    method="post"
+    action="/settings/profile"
+    data-validate="true"
+    novalidate
+  >
+    {{!-- Account info --}}
+    <div class="settings-section">
+      <div class="settings-row">
+        <div class="settings-row-label">Full name</div>
+        <div class="settings-row-value" style="max-width:320px;">
+          <input
+            name="displayName"
+            type="text"
+            value="{{#if user.displayName}}{{user.displayName}}{{else}}{{user.username}}{{/if}}"
+            required
+            data-parsley-notblank
+            data-parsley-minlength="2"
+            data-parsley-trigger="change focusout"
+          >
+        </div>
+      </div>
+
+      <div class="settings-row">
+        <div class="settings-row-label">Email address</div>
+        <div class="settings-row-value" style="max-width:320px;">
+          <input
+            name="email"
+            type="email"
+            value="{{user.email}}"
+            required
+            data-parsley-type="email"
+            data-parsley-notblank
+            data-parsley-trigger="change focusout"
+          >
+        </div>
+      </div>
+
+      <div class="settings-row">
+        <div class="settings-row-label">Password</div>
+        <div class="settings-row-value" style="display:flex; align-items:center; gap:16px;">
+          <span>••••••••••</span>
+          <button id="sp-password-toggle" class="btn secondary" type="button">
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Password (collapsed by default) --}}
+    <div class="settings-section">
+      <h3>Change Password</h3>
+
+      <div id="sp-password-block" style="display:none; margin-top:8px;">
+        <div class="settings-row">
+          <div class="settings-row-label">New password</div>
+          <div class="settings-row-value" style="max-width:320px;">
+            <input
+              id="sp-new-password"
+              name="newPassword"
+              type="password"
+              data-parsley-minlength="8"
+              data-parsley-trigger="change focusout"
+            >
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <div class="settings-row-label">Confirm new password</div>
+          <div class="settings-row-value" style="max-width:320px;">
+            <input
+              name="newPasswordConfirm"
+              type="password"
+              data-parsley-equalto="#sp-new-password"
+              data-parsley-equalto-message="Passwords must match"
+              data-parsley-trigger="change focusout"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Current password confirmation --}}
+    <div class="settings-section">
+      <h3>Confirm changes</h3>
+      <div class="settings-row" style="display:flex; align-items:center;">
+        <div class="settings-row-label" style="margin-right:auto;">
+          Current password
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div class="settings-row-value" style="max-width:320px;">
+            <input
+              name="currentPassword"
+              type="password"
+              required
+              data-parsley-notblank
+              data-parsley-minlength="8"
+              data-parsley-trigger="change focusout"
+            >
+          </div>
+
+          <button class="btn primary" type="submit">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  {{!-- Danger zone: delete account --}}
+  <div
+    class="settings-section"
+    style="margin-top: var(--space-lg); border-top:1px solid var(--panel-border); padding-top:var(--space-lg);"
+  >
+    <h3>Delete account</h3>
+    <p class="muted" style="max-width:480px;">
+      This will permanently delete your account, lists, tasks, tags, and settings.
+      This cannot be undone.
+    </p>
+
+    <form
+      method="post"
+      action="/settings/profile/delete"
+      onsubmit="return confirm('This cannot be undone. Delete your account and all data?');"
+    >
+      <div class="settings-row" style="display:flex; align-items:center; margin-top: var(--space-sm);">
+        <div class="settings-row-label" style="margin-right:auto;">
+          Confirm password
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div class="settings-row-value" style="max-width:320px;">
+            <input
+              name="confirmPassword"
+              type="password"
+              {{!-- guests can leave this blank; server ignores for isGuest --}}
+              data-parsley-minlength="8"
+              data-parsley-trigger="change focusout"
+            >
+          </div>
+
+          <button
+            class="btn"
+            type="submit"
+            style="background:#fee2e2; border-color:#b91c1c; color:#b91c1c;"
+          >
+            Delete my account
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    (function () {
+      var toggle   = document.getElementById('sp-password-toggle');
+      var block    = document.getElementById('sp-password-block');
+      var newInput = document.getElementById('sp-new-password');
+
+      if (!toggle || !block) return;
+
+      function openBlock() {
+        block.style.display = 'block';
+        toggle.textContent = 'Cancel';
+        if (newInput) newInput.focus();
+      }
+
+      function closeBlock() {
+        block.style.display = 'none';
+        toggle.textContent = 'Update';
+      }
+
+      toggle.addEventListener('click', function () {
+        if (block.style.display === 'block') {
+          closeBlock();
+        } else {
+          openBlock();
+        }
+      });
+    })();
+  </script>
+
+{{/settings}}

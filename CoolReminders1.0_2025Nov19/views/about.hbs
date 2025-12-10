@@ -1,0 +1,247 @@
+{{!-- views/about.hbs --}}
+
+<style>
+/* 
+  About page micro styles
+  Keep styles scoped to #about to avoid global leaks.
+  Use existing base classes where useful: .card, .center, .hidden, .cont-btn, .play-btn.
+*/
+#about { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+#about .hero { text-align: center; margin: 1rem 0 2rem; }
+#about .kicker { font-size: .95rem; letter-spacing: .04em; text-transform: uppercase; opacity: .8; }
+#about h1 { font-size: clamp(2rem, 3vw, 2.75rem); margin: .25rem 0 0; }
+#about .sub { font-size: 1.15rem; opacity: .9; margin-top: .5rem; }
+
+#about .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+#about .cta { padding: .75rem 1.1rem; border-radius: .5rem; text-decoration: none; display: inline-block; }
+#about .cta.primary { background: var(--brand, #1a73e8); color: #fff; }
+#about .cta.secondary { background: #f3f4f6; color: #111; }
+
+#about .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+#about .card { padding: 1rem; border-radius: .75rem; }
+#about .card h3 { margin: .25rem 0 .5rem; font-size: 1.1rem; }
+#about .muted { opacity: .8; }
+
+#about .meta { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin: 1.5rem 0; }
+#about .stat { text-align: center; padding: .75rem 1rem; border-radius: .75rem; background: #f9fafb; }
+#about .stat .num { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; }
+
+#about .section { margin: 2.25rem 0; }
+#about .section h2 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); margin-bottom: .25rem; }
+#about .section p.lead { font-size: 1.05rem; margin: 0 0 1rem; }
+
+#about .scenarios .card { display: grid; grid-template-rows: auto 1fr auto; }
+#about .scenarios .mini { font-size: .95rem; }
+
+#about .how { counter-reset: step; }
+#about .how li { list-style: none; margin: 0 0 .75rem; padding-left: 2.25rem; position: relative; }
+#about .how li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 0; width: 1.75rem; height: 1.75rem; border-radius: 50%; display: grid; place-items: center; background: #111; color: #fff; }
+
+#about figure { margin: 1rem 0; }
+#about figure img { width: 100%; height: auto; border-radius: .5rem; }
+#about figcaption { font-size: .9rem; text-align: center; opacity: .8; margin-top: .25rem; }
+
+#about details { background: #f9fafb; padding: 1rem; border-radius: .5rem; }
+#about summary { cursor: pointer; font-weight: 600; }
+
+/* prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto; }
+}
+</style>
+
+<main id="about" aria-labelledby="about-title">
+  <!-- Hero -->
+  <header class="hero">
+    <p class="kicker">Meet Cool Reminders</p>
+    <h1 id="about-title">Less juggling, more finishing</h1>
+    <p class="sub">
+      Color tags, quick subtasks, gentle nudges, and a layout that fits how you think.
+      Wake up to a morning summary that sets the tone for the day.
+    </p>
+    <div class="cta-row">
+      <a class="cta primary cont-btn" href="/signup" aria-label="Create your account">Get started</a>
+      <a class="cta secondary play-btn" href="/login" aria-label="Log in to your account">Log in</a>
+    </div>
+
+    <!-- Fast facts to build trust -->
+    <div class="meta" role="group" aria-label="Quick facts">
+      <div class="stat card"><div class="num">3 clicks</div><div class="muted">from idea to task</div></div>
+      <div class="stat card"><div class="num">2 minutes</div><div class="muted">to first list</div></div>
+      <div class="stat card"><div class="num">Daily</div><div class="muted">morning summary</div></div>
+      <div class="stat card"><div class="num">Privacy first</div><div class="muted">you control data</div></div>
+    </div>
+  </header>
+
+  <!-- Feature highlights -->
+  <section class="section" aria-labelledby="features-title">
+    <h2 id="features-title">What makes it feel easy</h2>
+    <div class="grid">
+      <article class="card" aria-label="Tags and filters">
+        <h3>Tags and filters</h3>
+        <p class="muted">Color tags and quick filters keep Today, Scheduled, and All in perfect focus.</p>
+      </article>
+      <article class="card" aria-label="Subtasks and sections">
+        <h3>Subtasks and sections</h3>
+        <p class="muted">Break work into small wins. Group with sections. Reorder with a simple drag.</p>
+      </article>
+      <article class="card" aria-label="Smart reminders">
+        <h3>Smart reminders</h3>
+        <p class="muted">Pick offsets like two hours or thirty minutes. Add a calm morning email summary.</p>
+      </article>
+      <article class="card" aria-label="Attachments and links">
+        <h3>Attachments and links</h3>
+        <p class="muted">Keep files and references with the task so prep and delivery happen faster.</p>
+      </article>
+      <article class="card" aria-label="Keyboard friendly">
+        <h3>Keyboard friendly</h3>
+        <p class="muted">Type to add, enter to confirm, escape to pause. Flow stays smooth.</p>
+      </article>
+      <article class="card" aria-label="Privacy and control">
+        <h3>Privacy and control</h3>
+        <p class="muted">Local sessions with Passport, secure forms with Parsley, clear ownership of lists.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Scenarios instead of monotone user stories -->
+  <section class="section scenarios" aria-labelledby="scenarios-title">
+    <h2 id="scenarios-title">See it in action</h2>
+    <p class="lead">Three tiny stories that match real days.</p>
+
+    <div class="grid">
+      <article class="card" aria-label="Morning prep scenario">
+        <h3>Morning prep</h3>
+        <p class="mini">
+          The summary arrives. Two items due this afternoon, one needs a file.
+          Click the item, attach the PDF, set a quick reminder for lunch time.
+          Mark the easy subtask done. Mood lifts, focus returns.
+        </p>
+        <p class="muted">Works well with tags like Priority and School.</p>
+      </article>
+
+      <article class="card" aria-label="Deep work scenario">
+        <h3>Deep work</h3>
+        <p class="mini">
+          Open the list. Filter to Today. Collapse chatter. One task, three subtasks.
+          Timer starts, you check one subtask at a time. Clean progress line, no noise.
+        </p>
+        <p class="muted">Inline edit keeps you in flow.</p>
+      </article>
+
+      <article class="card" aria-label="Team mode scenario">
+        <h3>Team mode</h3>
+        <p class="mini">
+          Share a list with a classmate as view or edit.
+          Add notes and links so handoff is simple.
+          Everyone sees the same truth, right where the work lives.
+        </p>
+        <p class="muted">Sharing respects list ownership and permission.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- How it works at a glance -->
+  <section class="section" aria-labelledby="how-title">
+    <h2 id="how-title">How it works</h2>
+    <ol class="how" aria-label="Four steps">
+      <li><strong>Create a list.</strong> Give it a name and color. Add a fun icon if you like.</li>
+      <li><strong>Add tasks.</strong> Use quick add. Press enter. Add subtasks when needed.</li>
+      <li><strong>Set timing.</strong> Due date, repeat rule, and reminder offsets that fit your day.</li>
+      <li><strong>Stay on track.</strong> Filter by tag or priority. Check progress as items complete.</li>
+    </ol>
+    <figure class="center">
+      <img src="../documentation/Dashboard_main.png" alt="Dashboard with lists and tasks">
+      <figcaption>Clear layout. Quick capture. Easy focus.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Under the hood -->
+  <section class="section" aria-labelledby="tech-title">
+    <h2 id="tech-title">Under the hood</h2>
+    <div class="grid">
+      <article class="card" aria-label="Authentication">
+        <h3>Authentication</h3>
+        <p class="muted">Passport local strategy with sessions. Secure cookie settings and clear sign out.</p>
+      </article>
+      <article class="card" aria-label="Validation">
+        <h3>Validation</h3>
+        <p class="muted">Parsley guards inputs on the client. Required fields and sane dates before submit.</p>
+      </article>
+      <article class="card" aria-label="Interaction">
+        <h3>Interaction</h3>
+        <p class="muted">Vue powers inline edits, filters, and smooth updates without reloads.</p>
+      </article>
+    </div>
+
+    <details class="section">
+      <summary>Peek at the data model</summary>
+      <p class="muted">
+        User with Settings and Lists. Each List has many Tasks. A Task can have Subtasks, Notes, Links, Dates, Reminders, Attachments, Tags, and Priority. Progress tracks done over total.
+      </p>
+      <pre><code>{
+  "user": { "id": "usr_123", "settingsId": "set_123" },
+  "settings": { "theme": "light", "timezone": "America/New_York" },
+  "list": { "id": "lst_1", "ownerUserId": "usr_123", "title": "School" },
+  "task": { "id": "tsk_1", "listId": "lst_1", "title": "Finish lab", "dueAt": "2025-10-31T16:00:00Z" }
+}</code></pre>
+    </details>
+  </section>
+
+  <!-- Trust and privacy -->
+  <section class="section" aria-labelledby="trust-title">
+    <h2 id="trust-title">Trust and privacy</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Your data, your call</h3>
+        <p class="muted">You can export lists on request. You can remove items at any time.</p>
+      </article>
+      <article class="card">
+        <h3>Clear sessions</h3>
+        <p class="muted">Log out ends the session on the server and the browser.</p>
+      </article>
+      <article class="card">
+        <h3>Respect for attention</h3>
+        <p class="muted">Reminders are calm and on time. No extra alerts. No spam.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Small FAQ -->
+  <section class="section" aria-labelledby="faq-title">
+    <h2 id="faq-title">Quick answers</h2>
+    <details>
+      <summary>Can I reorder tasks</summary>
+      <p>Coming Soon, reorder inside a list. Position is saved so your view stays familiar.</p>
+    </details>
+    <details>
+      <summary>Can I search</summary>
+      <p>Coming Soon, search by title or notes to jump right to what you need.</p>
+    </details>
+    <details>
+      <summary>Can I share a list</summary>
+      <p>Coming Soon, invite users and choose view or edit. </p>
+    </details>
+  </section>
+
+  <!-- Final call to action -->
+  <section class="section center" aria-labelledby="cta-title">
+    <h2 id="cta-title">Ready to feel lighter</h2>
+    <p class="lead">Make your first list, add three tasks, and enjoy a calmer morning.</p>
+    <div class="cta-row">
+      <a class="cta primary cont-btn" href="/signup">Create account</a>
+      <a class="cta secondary play-btn" href="/login">I already have one</a>
+    </div>
+  </section>
+
+  <!-- Helpful links -->
+  <section class="section" aria-labelledby="links-title">
+    <h2 id="links-title">Helpful links</h2>
+    <ul>
+      <li><a href="https://forms.gle/xFmKsCMb1hCrbFQJA" target="_blank" rel="noopener">Feedback Form</a></li>
+      <li><a href="http://passportjs.org/docs" target="_blank" rel="noopener">Passport docs</a></li>
+      <li><a href="https://parsleyjs.org/doc/" target="_blank" rel="noopener">Parsley docs</a></li>
+      <li><a href="https://vuejs.org/v2/guide/" target="_blank" rel="noopener">Vue guide</a></li>
+    </ul>
+  </section>
+</main>

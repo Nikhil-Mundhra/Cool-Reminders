@@ -1,0 +1,140 @@
+{{!-- views/settings-layout.hbs --}}
+{{#> settings}}
+
+  <h1 class="settings-title">Layout & Preferences</h1>
+  <p class="settings-subtitle">
+    Choose your theme and how lists and tasks are styled.
+  </p>
+
+  <form
+    method="post"
+    action="/settings/layout"
+    data-validate="true"
+    data-parsley-errors-messages-disabled
+    novalidate>
+
+    {{!-- Task theme: status colors --}}
+    <div class="settings-section">
+      <h3>Task status colors</h3>
+      <p class="muted" style="margin: 0 0 var(--space-sm) 0;">
+        Customize colors for tasks that are due, past due, or done.
+      </p>
+
+      <div class="settings-row">
+        <div class="settings-row-label">Due</div>
+        <div class="settings-row-value" style="max-width:220px;">
+          <input
+            type="color"
+            name="taskDueColor"
+            value="{{taskDueColor}}"
+          >
+        </div>
+      </div>
+
+      <div class="settings-row">
+        <div class="settings-row-label">Past due</div>
+        <div class="settings-row-value" style="max-width:220px;">
+          <input
+            type="color"
+            name="taskPastDueColor"
+            value="{{taskPastDueColor}}"
+          >
+        </div>
+      </div>
+
+      <div class="settings-row">
+        <div class="settings-row-label">Done</div>
+        <div class="settings-row-value" style="max-width:220px;">
+          <input
+            type="color"
+            name="taskDoneColor"
+            value="{{taskDoneColor}}"
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>App theme</h3>
+
+      <div class="settings-row">
+        <div class="settings-row-label">Theme</div>
+        <div class="settings-row-value" style="max-width:220px;">
+          <select name="theme" required>
+            <option value="light"  {{#if (eq theme "light")}}selected{{/if}}>Light</option>
+            <option value="dark"   {{#if (eq theme "dark")}}selected{{/if}}>Dark</option>
+            <option value="custom" {{#if (eq theme "custom")}}selected{{/if}}>Custom</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="settings-row">
+        <div class="settings-row-label">Time zone</div>
+        <div class="settings-row-value" style="max-width:220px;">
+          <select name="timezone">
+            <option value="America/New_York"              {{#if (eq timezone "America/New_York")}}selected{{/if}}>US Eastern</option>
+            <option value="America/Chicago"               {{#if (eq timezone "America/Chicago")}}selected{{/if}}>US Central</option>
+            <option value="America/Denver"                {{#if (eq timezone "America/Denver")}}selected{{/if}}>US Mountain</option>
+            <option value="America/Los_Angeles"           {{#if (eq timezone "America/Los_Angeles")}}selected{{/if}}>US Pacific</option>
+            <option value="America/Indiana/Indianapolis"  {{#if (eq timezone "America/Indiana/Indianapolis")}}selected{{/if}}>Indiana, Indianapolis</option>
+            <option value="Europe/Paris"                  {{#if (eq timezone "Europe/Paris")}}selected{{/if}}>Europe (Paris)</option>
+            <option value="Asia/Dubai"                    {{#if (eq timezone "Asia/Dubai")}}selected{{/if}}>Gulf (Dubai)</option>
+            {{!-- <option value="Asia/New Delhi" {{#if (eq timezone "Asia/New Delhi")}}selected{{/if}}>India, New Delhi</option> --}}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--space-lg);">
+      <button class="btn primary" type="submit">Save layout</button>
+    </div>
+  </form>
+
+  {{!-- Order of lists (separate forms per row, NOT inside the main layout form) --}}
+  <div class="settings-section">
+    <h3>Order of lists</h3>
+    <p class="muted" style="margin: 0 0 var(--space-sm) 0;">
+      Use the arrows to move lists up or down. This will change the order in the sidebar.
+    </p>
+
+    <ul class="layout-list">
+      {{#each layoutOrder}}
+        <li class="layout-item" data-list-id="{{this.id}}">
+          <span class="layout-handle">☰</span>
+          <span>{{this.title}}</span>
+
+          <form
+            method="post"
+            action="/settings/layout/reorder"
+            style="margin-left:auto; display:flex; gap:4px;"
+          >
+            <input type="hidden" name="listId" value="{{this.id}}">
+
+            {{#unless @first}}
+              <button
+                type="submit"
+                name="direction"
+                value="up"
+                class="btn secondary"
+                style="padding:2px 6px; font-size:.8rem;">
+                ↑
+              </button>
+            {{/unless}}
+
+            {{#unless @last}}
+              <button
+                type="submit"
+                name="direction"
+                value="down"
+                class="btn secondary"
+                style="padding:2px 6px; font-size:.8rem;">
+                ↓
+              </button>
+            {{/unless}}
+          </form>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+{{/settings}}
