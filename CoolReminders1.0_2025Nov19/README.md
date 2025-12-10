@@ -6,6 +6,15 @@ Your brain is an F1 car; your tasks are traffic cones. Chaos ensues. Cool Remind
 
 Cool Reminders is a web app for managing multiple to do lists. Users can register and sign in, and after signing in, they can create lists, add tasks, set dates and reminders, and mark tasks complete. They can also organize with color tags, priority filters, nested sections and subtasks, plus optional morning email summaries.
 
+## Live URL
+
+It might take a minute to load:
+- https://ait-final-project-nikhil-mundhra.onrender.com/
+
+Repository Link
+---
+https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra
+
 
 ## Data Model
 
@@ -78,7 +87,7 @@ An Example Task
   title: "Finish lab",                // task title
   notes: "Debug app.mjs and add .gitignore", // rich text allowed
   links: [                                       // related links
-    { url: "https://https://cs.nyu.edu/courses/fall25/CSCI-UA.0467-001/", title: "AIT" }
+    { url: "https://https://www.CoolReminders.com/", title: "Cool Reminders" }
   ],
   tags: ["tag_priority", "tag_cs"],              // refs to Tag
   priority: "high",                              // low, normal, high
@@ -102,7 +111,7 @@ An Example Task
 ```
 
 ## [Link to Commented First Draft Schema](db.mjs) 
-https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/main/db.mjs
+https://github.com/Cool-Reminders/blob/main/db.mjs
 
 ## Wireframes
 
@@ -153,46 +162,6 @@ Wireframes for all of the pages on site; used Balsamiq.
 15. As a user, I can upload or attach files to a task.
 16. As a user, I can update my personal settings such as theme, layout order, timezone, and notification channels.
 
-## Research Topics
-
-* (3 points) Integrate user authentication (Passport.js and bcrypt)
-    * I use **Passport.js (local strategy)** and **bcrypt** to handle user signup, login, and persistent sessions.
-    * Passwords are **hashed with bcrypt** before being stored in MongoDB; plain-text passwords are never saved.
-    * Sessions are managed with `express-session` and `connect-mongo`, so logged-in state survives refreshes and works across routes like `/dashboard` and `/settings`.
-    * A small `requireAuth` middleware protects private pages (dashboard, settings, etc.) and redirects unauthenticated users back to the login page.
-    * To test:
-        * Visit `/signup` to create a user.
-        * Then log in via `/login` (or the root `/`) and verify that you can access `/dashboard` and see your lists and tasks.
-    * Deployed examples:
-        * Register:  
-          `https://ait-final-project-nikhil-mundhra.onrender.com/signup`
-        * Login:  
-          `https://ait-final-project-nikhil-mundhra.onrender.com`
-
-* (4 points) Learn Parsley.js to perform client side form validation
-    * I include **Parsley.js from a CDN** in the layout and attach it to forms using the `data-validate="true"` attribute.
-    * I add `data-parsley-*` attributes to enforce required fields, length limits, and basic sanity checks:
-        * Auth forms: ensure email and password are required and correctly formatted.
-        * Quick add task form (on the dashboard): 
-            * `title` is required (`data-parsley-notblank`, `data-parsley-maxlength="140"`).
-            * `notes` has a max length (e.g. `data-parsley-maxlength="500"`).
-            * `dueDate` uses a “not in the past” rule (custom `data-parsley-notpast` validator).
-    * Parsley prevents submit until the form is valid and shows inline error messages, which are styled via `.parsley-errors-list` and `.parsley-error` in `base.css`.
-    * Example reference used:  
-      `cs.nyu.edu/~jversoza/ait-final/my-form`
-
-* (4 points) vue.js
-    * I use **Vue.js 3 (global build)** as a progressive enhancement layer on the dashboard page instead of rebuilding the whole app as a SPA.
-    * On `/dashboard`, the server renders all HTML (lists, tags, task cards) and also embeds a JSON `dashboardState` blob in:
-        * `<script id="dashboard-state" type="application/json">…</script>`
-    * `public/js/dashboard.js` reads this state and calls `Vue.createApp` to mount on `#dashboard-app`. The Vue instance manages:
-        * Local UI flags like `quickaddExpanded` for the **collapsible quick add form** (everything except the title can be toggled open / closed).
-        * Drawer state (`drawerOpen` / `drawerTask`) for the right-hand task details panel (wired to existing DOM-based drawer code).
-    * Vue is chosen because its template syntax maps well onto my existing Handlebars / HTML structure, and it lets me incrementally add reactive behavior without rewriting the entire app.
-
-
-10 points total out of 8 required points (___TODO__: additional points will __not__ count for extra credit)
-
 
 ## [Link to Initial Main Project File](app.mjs) 
 https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/main/app.mjs
@@ -242,3 +211,12 @@ https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundh
    Used in `db.mjs` to define `User`, `Settings`, `List`, `Task`, and `Tag` schemas and in `routes/dashboard.mjs` where `List.find`, `Tag.find`, `Task.find`, and `Task.findOne` plus `.populate('tagIds').lean()` load data for the dashboard state. 
    
    (Find in https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/main/MILESTONE_04.md#link-to-github-line-numbers-for-schemas-dbjs-or-models-folder)
+
+8. [bcryptjs documentation](https://www.npmjs.com/package/bcryptjs)
+    - Used for password hashing and comparison  
+
+9. [express-session documentation](https://www.npmjs.com/package/express-session) 
+    — Session management setup  
+
+10. [connect-mongo documentation](https://www.npmjs.com/package/connect-mongo) 
+    — MongoDB session store integration  

@@ -32,7 +32,7 @@ Only the "Title" is required in this form, the rest is optional. Once it submits
 **User Authentication (Auth middleware)**  
 Auth middleware (JSON-aware) used to protect Task routes:  
   `routes/helpers.mjs`  
-https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/e65ec8367479c23ce7cf67a689d68956ceda7c8a/routes/helpers.mjs#L9
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/routes/helpers.mjs#L9
 
  Middleware Usage:
  `routes/tasks.mjs` 
