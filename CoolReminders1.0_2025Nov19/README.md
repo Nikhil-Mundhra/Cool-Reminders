@@ -11,10 +11,15 @@ Cool Reminders is a web app for managing multiple to do lists. Users can registe
 It might take a minute to load:
 - https://ait-final-project-nikhil-mundhra.onrender.com/
 
-Repository (Base version) Link
----
+## Repository (Base version) Link
+
 https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/CoolReminders1.0_2025Nov19/
 
+## [Link to Commented Schema](db.mjs) 
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/main/db.mjs
+
+## [Link to Main Project File](app.mjs) 
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/main/app.mjs
 
 ## Data Model
 
@@ -158,9 +163,6 @@ An Example Task
 }
 ```
 
-## [Link to Commented First Draft Schema](db.mjs) 
-https://github.com/Cool-Reminders/blob/main/db.mjs
-
 ## Wireframes
 
 Wireframes for all of the pages on site; used Balsamiq.
@@ -211,54 +213,51 @@ Wireframes for all of the pages on site; used Balsamiq.
 16. As a user, I can update my personal settings such as theme, layout order, timezone, and notification channels.
 
 
-## [Link to Initial Main Project File](app.mjs) 
-https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/main/app.mjs
-
 ## Annotations / References Used
 
 1. [Passport.js authentication docs](http://passportjs.org/docs)  
   * Used in `app.mjs` for configuring `passport` and `passport.session()` middleware:
-      https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/app.mjs#L72
+      https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/app.mjs#L72
   * In `routes/auth.mjs` for the `/signup` and `/login` route handlers that call `passport.authenticate(...)`.
-      https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/routes/auth.mjs#L109
+      https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/auth.mjs#L109
   * In `routes/passport.mjs` to `serializeUser` and `deserializeUser`.
-   https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/routes/passport.mjs#L57
+   https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/passport.mjs#L57
 
 2. [Vue.js 3 Guide](https://vuejs.org/guide/introduction.html)  
    Used in `public/js/dashboard.js` inside `bootstrapVueDashboard()` and the `DashboardApp` `createApp({...})` call that hydrates `#dashboard-app` and controls `quickaddExpanded` and `drawerOpen`.
-   https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/public/js/dashboard.js#L34
-   https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/public/js/dashboard.js#L49
+   https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/public/js/dashboard.js#L34
+   https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/public/js/dashboard.js#L49
 
 3. [Parsley.js Documentation](https://parsleyjs.org/doc/)  
   * Used in `views/layout.hbs` to include the Parsley CDN script and 
-    https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/views/layout.hbs#L14
+    https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/views/layout.hbs#L14
   * In `views/dashboard.hbs` on the quick add task form with attributes such as `data-parsley-notblank`, `data-parsley-maxlength`, and `data-parsley-notpast`.
-    https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/views/dashboard.hbs#L113
+    https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/views/dashboard.hbs#L113
    
 
 4. [Socket.IO Client API](https://socket.io/docs/v4/client-api/)  
   Used in `public/js/dashboard.js`:
-   https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/public/js/dashboard.js#L110
+   https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/public/js/dashboard.js#L110
   - `socket.on('list:updated')`, `socket.on('list:deleted')`, and `socket.on('task:deleted')` keep lists and tasks in sync:
-   https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/public/js/dashboard.js#L579
+   https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/public/js/dashboard.js#L579
 
 
 5. [MDN Web Docs: Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)  
   * Used in `public/js/dashboard.js` in helper functions such as:
-   https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/public/js/dashboard.js#L161
-   https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/public/js/dashboard.js#L118
+   https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/public/js/dashboard.js#L161
+   https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/public/js/dashboard.js#L118
   * Which perform `PATCH` requests to `/api/tasks/:id` and `/api/lists/:id`.
 
 6. [MDN Web Docs: Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)  
   * Used in `routes/dashboard.mjs` in the `router.get('/dashboard', ...)` handler:
-   https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/routes/dashboard.mjs#L26
+   https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/dashboard.mjs#L26
   * Format `t.dueAt` into `dueText` when mapping Mongo tasks to `displayTasks`.
-   https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/1ba40e7b291cace2c7bd12e603f8834b80509d0f/routes/dashboard.mjs#L125
+   https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/dashboard.mjs#L125
 
 7. [Mongoose ODM Documentation](https://mongoosejs.com/docs/guide.html)  
    Used in `db.mjs` to define `User`, `Settings`, `List`, `Task`, and `Tag` schemas and in `routes/dashboard.mjs` where `List.find`, `Tag.find`, `Task.find`, and `Task.findOne` plus `.populate('tagIds').lean()` load data for the dashboard state. 
    
-   (Find in https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/main/MILESTONE_04.md#link-to-github-line-numbers-for-schemas-dbjs-or-models-folder)
+   (Find in https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/CoolReminders1.0_2025Nov19/main/README.md)
 
 8. [bcryptjs documentation](https://www.npmjs.com/package/bcryptjs)
     - Used for password hashing and comparison  
@@ -269,6 +268,7 @@ https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundh
 10. [connect-mongo documentation](https://www.npmjs.com/package/connect-mongo) 
     — MongoDB session store integration  
 
+11. public/javascripts/hello.js - XHR JSON loading pattern based on MDN “Using XMLHttpRequest” examples - https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
 
 ## Additional project notes 
 
@@ -280,4 +280,4 @@ Open the Settings pages (/settings/profile, /settings/layout, /settings/notifica
 
 There are a few functional tests inside here as demos on usage:
 
-https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/main/documentation/Testing
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/CoolReminders1.0_2025Nov19/main/documentation/Testing

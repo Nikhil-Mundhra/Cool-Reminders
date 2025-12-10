@@ -1,17 +1,6 @@
-Milestone 04 - Final Project Documentation
-===
-
-NetID
----
-nm4358
-
 Name
 ---
 Nikhil Mundhra
-
-Repository Link
----
-https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra
 
 URL for deployed site 
 ---
@@ -174,5 +163,3 @@ Attributions
 * public/js/dashboard.js - Vue createApp initialization and reactive state pattern inspired by Vue 3 application guide - https://vuejs.org/guide/essentials/application.html
 
 * routes/dashboard.mjs & public/js/dashboard.js - Socket.IO event broadcast/listen pattern based on Socket.IO v4 documentation - https://socket.io/docs/v4/
-
-* public/javascripts/hello.js - XHR JSON loading pattern based on MDN “Using XMLHttpRequest” examples - https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
