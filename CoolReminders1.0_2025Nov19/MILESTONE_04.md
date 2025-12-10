@@ -112,7 +112,6 @@ Description of research topics above with points
 
 Links to github line number(s) for research topics described above (one link per line)
 ---
-(TODO: add link to github line number(s), one per line for research topics ... for example, if using auth/passport, link to auth.js or where bulk of auth code is)
 
 1. **User authentication with Passport and bcrypt**  
 
@@ -161,20 +160,6 @@ https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundh
 https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/2948c8dc9438b937d5e0055570a864df2c8401df/public/js/dashboard.js#L99
 https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/2948c8dc9438b937d5e0055570a864df2c8401df/public/js/dashboard.js#L102
 https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/2948c8dc9438b937d5e0055570a864df2c8401df/public/js/dashboard.js#L103
-
-
-Optional project notes 
---- 
-
-Sign up at /signup, then log in at / to access the dashboard. 
-
-Use the quick add form to create tasks and the sidebar (by clicking on the created task) to switch lists and apply tag filters. 
-
-Open the Settings pages (/settings/profile, /settings/layout, /settings/notifications) to change your display name, layout preferences, theme, and reminder options.
-
-There are a few functional tests inside here as demos on usage:
-
-https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/main/documentation/Testing
 
 
 Attributions

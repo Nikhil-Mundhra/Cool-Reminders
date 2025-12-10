@@ -11,9 +11,9 @@ Cool Reminders is a web app for managing multiple to do lists. Users can registe
 It might take a minute to load:
 - https://ait-final-project-nikhil-mundhra.onrender.com/
 
-Repository Link
+Repository (Base version) Link
 ---
-https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/CoolReminders1.0_2025Nov19/
 
 
 ## Data Model
@@ -48,7 +48,55 @@ The following relationships are one -> many:
 * List -> Task
 * Task -> Subtask / Links / Reminders / Tags
 
-(__TODO__: sample documents)
+**User Authentication (Auth middleware)**  
+Auth middleware (JSON-aware) used to protect Task routes:  
+  `routes/helpers.mjs`  
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/helpers.mjs#L9
+
+ Middleware Usage:
+ `routes/tasks.mjs` 
+- https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/tasks.mjs#L37
+- https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/tasks.mjs#L80
+- https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/tasks.mjs#L111
+- https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/tasks.mjs#L170
+- https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/tasks.mjs#L226
+
+**Client-side form validation with Parsley.js**
+
+ Attaches Parsley to any form that opts in:
+ `views/layout.hbs` 
+- https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19//views/layout.hbs#L13
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/parsleyjs@2/dist/parsley.min.js"></script>
+    <script>
+      /* attach Parsley to any form that opts in */
+      document.addEventListener('DOMContentLoaded', function () {
+        var forms = document.querySelectorAll('form[data-validate="true"]');
+        if (window.Parsley && forms.length) {
+          window.Parsley.addValidator('notblank', {
+            validateString: function (value) { return value.trim().length > 0; },
+            messages: { en: 'Required' }
+          });
+          Array.prototype.forEach.call(forms, function (f) { f.parsley(); });
+        }
+      });
+    </script>
+```
+
+**AJAX**
+* An AJAX request: 
+`routes/dashboard.mjs`
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/public/js/dashboard.js#L43
+* Updating the UI without reloading: 
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/public/js/dashboard.js#L76
+
+**Bcrypt**  
+* Login + Signup routes (hash/compare):  
+`routes/auth.mjs`
+- https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/auth.mjs#L70
+- https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/auth.mjs#L99
+- https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/routes/auth.mjs#L155
 
 An Example Login:
 
@@ -220,3 +268,16 @@ https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundh
 
 10. [connect-mongo documentation](https://www.npmjs.com/package/connect-mongo) 
     — MongoDB session store integration  
+
+
+## Additional project notes 
+
+Sign up at /signup, then log in at / to access the dashboard. 
+
+Use the quick add form to create tasks and the sidebar (by clicking on the created task) to switch lists and apply tag filters. 
+
+Open the Settings pages (/settings/profile, /settings/layout, /settings/notifications) to change your display name, layout preferences, theme, and reminder options.
+
+There are a few functional tests inside here as demos on usage:
+
+https://github.com/nyu-csci-ua-0467-001-002-fall-2025/final-project-Nikhil-Mundhra/blob/main/documentation/Testing
