@@ -26,7 +26,6 @@ import passport from './routes/passport.mjs';
 import { info, err, makeReqId } from './routes/utils/log.mjs';
 import { attachSessionUser } from './routes/helpers.mjs';
 import compression from 'compression';
-app.use(compression());
 
 config();
 
@@ -41,6 +40,7 @@ app.set('trust proxy', 1);   /* <--- trusting render */
 /* parsers */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(compression());
 
 /*
   sessionMiddleware
