@@ -9,17 +9,18 @@ Cool Reminders is a web app for managing multiple to do lists. Users can registe
 ## Live URL
 
 It might take a minute to load:
-- https://ait-final-project-nikhil-mundhra.onrender.com/
+
+https://ait-final-project-nikhil-mundhra.onrender.com/
 
 ## Repository (Base version) Link
 
 https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/CoolReminders1.0_2025Nov19/
 
-## [Link to Commented Schema](db.mjs) 
-https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/main/db.mjs
+## Link to Commented Schema
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/main/CoolReminders1.0_2025Nov19/db.mjs
 
-## [Link to Main Project File](app.mjs) 
-https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/main/app.mjs
+## Link to Main Project File
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/main/CoolReminders1.0_2025Nov19/app.mjs
 
 ## Data Model
 
