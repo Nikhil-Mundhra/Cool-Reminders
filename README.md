@@ -17,7 +17,7 @@ https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/CoolReminders1.0_2025Nov19
 
 ## Link to Full Base Specs
 
-https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/1a5b58cac3505cfc9b9f1dc6b348321a2808a254/CoolReminders1.0_2025Nov19/main/README.md
+https://github.com/Nikhil-Mundhra/Cool-Reminders/blob/main/CoolReminders1.0_2025Nov19/README.md
 
 ## TODOs - Upcoming features!
 
