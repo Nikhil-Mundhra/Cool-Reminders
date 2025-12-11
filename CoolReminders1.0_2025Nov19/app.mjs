@@ -25,6 +25,8 @@ import tasksRouter from './routes/tasks.mjs';
 import passport from './routes/passport.mjs';
 import { info, err, makeReqId } from './routes/utils/log.mjs';
 import { attachSessionUser } from './routes/helpers.mjs';
+import compression from 'compression';
+app.use(compression());
 
 config();
 
@@ -85,6 +87,8 @@ app.use((req, res, next) => {
   next();
 });
 
+/* a maxAge so repeat navigations do not revalidate every time */
+app.use('/public', express.static(path.join(__dirname, 'public'), { maxAge: '1h' }));
 
 /* static */
 app.use('/public', express.static(path.join(__dirname, 'public')));

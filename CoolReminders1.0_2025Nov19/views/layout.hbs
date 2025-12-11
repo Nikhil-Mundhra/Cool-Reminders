@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/public/css/dashboard.css">
 
     <!-- Parsley (global) -->
-    <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2/dist/parsley.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2/dist/parsley.min.js" defer></script>
       <script>
         document.addEventListener('DOMContentLoaded', function () {
           var forms = document.querySelectorAll('form[data-validate="true"]');
@@ -40,7 +40,7 @@
       </script>
 
       <!-- Vue 3 (global build, used on Dashboard) -->
-      <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" defer></script>
 
   </head>
 
@@ -92,9 +92,9 @@
     </footer>
 
     <!-- Global page JS (safe to include always) -->
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js" defer></script>
     <!-- Vue 3 (global build) for dashboard -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-    <script src="/public/js/dashboard.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" defer></script>
+    <script src="/public/js/dashboard.js" defer></script>
   </body>
 </html>
