@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/public/css/base.css">
     <link rel="stylesheet" href="/public/css/dashboard.css">
 
+    <!-- Parsley expecting jQuery ($.fn) but jQuery is not present (or not loaded before Parsley). -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
     <!-- Parsley (global) -->
     <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2/dist/parsley.min.js" defer></script>
       <script>
@@ -34,13 +36,10 @@
               messages: { en: 'Due date cannot be in the past' }
             });
 
-            Array.prototype.forEach.call(forms, function (f) { f.parsley(); });
+            Array.prototype.forEach.call(forms, function (f) { window.jQuery(f).parsley(); });
           }
         });
       </script>
-
-      <!-- Vue 3 (global build, used on Dashboard) -->
-      <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" defer></script>
 
   </head>
 
